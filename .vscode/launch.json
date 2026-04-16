@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Semic Version Changer",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
+      "preLaunchTask": "npm: compile"
+    }
+  ]
+}
+
+
+"{""TestboxIp"": ""192.168.5.87"", ""OperatorId"": ""a8da0349-e107-4860-96b6-c556fe914e30"", ""OperatorEmail"": ""ultrimis@test.com"", ""LabelTemplateName"": ""Kartonik_jednostkowy_bez_kluczy_ZD421"", ""WaterMeterOrderNumber"": ""499235"", ""LabelTemplateParameters"": ""{\""LastEightProductionMeterSerialNumberCharacters\"":\""80268564\"",\""BaanNumber\"":\""75-4309262-056\"",\""ProductionMeterSerialNumber\"":\""0601162080268564\"",\""CombinedProductCardParameters\"":\""Q3=4m3/h DN15 R800;G1 L=130mm;T50 \\u002B Strainer;LoRaWAN 868 MHz DS 03A C1;CW617N with lid \"",\""ManufacturerMeterSerialNumber\"":\""8APA2080268564\"",\""ExternalClientNumber\"":\""262000002\""}"", ""IsFirstArticleInspection"": ""True""}"
+
+"{""LastEightProductionMeterSerialNumberCharacters"":""80268566"",""BaanNumber"":""75-4309262-056"",""ProductionMeterSerialNumber"":""0601162080268566"",""CombinedProductCardParameters"":""Q3=4m3/h DN20 R800;G1 L=130mm;T50 \u002B Strainer;LoRaWAN 868 MHz DS 03A C1;CW617N with lid "",""ManufacturerMeterSerialNumber"":""8APA2080268566"",""ExternalClientNumber"":""262000004""}"

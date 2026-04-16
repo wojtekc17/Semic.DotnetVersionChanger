@@ -1,0 +1,415 @@
+:root {
+  color-scheme: var(--vscode-color-scheme, dark);
+  --background: var(--vscode-editor-background, #1e1e1e);
+  --background-elevated: var(--vscode-sideBar-background, #252526);
+  --background-muted: var(--vscode-input-background, #313131);
+  --border: var(--vscode-panel-border, rgba(255, 255, 255, 0.08));
+  --border-strong: var(--vscode-widget-border, rgba(255, 255, 255, 0.14));
+  --text: var(--vscode-foreground, #cccccc);
+  --text-muted: var(--vscode-descriptionForeground, #9d9d9d);
+  --accent: var(--vscode-focusBorder, #007fd4);
+  --accent-strong: var(--vscode-button-background, #0e639c);
+  --button-foreground: var(--vscode-button-foreground, #ffffff);
+  --button-secondary-background: var(--vscode-button-secondaryBackground, #3a3d41);
+  --button-secondary-foreground: var(--vscode-button-secondaryForeground, #ffffff);
+  --error: var(--vscode-errorForeground, #f14c4c);
+  font-family: "Segoe UI", "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.appShell {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.tableShell,
+.sideCard,
+.sidePanelShell,
+.statusBar {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.searchBar {
+  min-width: 0;
+}
+
+.searchInput {
+  width: 100%;
+}
+
+.textInput {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  background: var(--background-muted);
+  color: var(--text);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.textInput:focus {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.hasValidationError {
+  border-color: var(--error);
+}
+
+.tableShell {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  border-right: 0;
+}
+
+.tableToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+}
+
+.selectAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.mutedLabel {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.tableScroller {
+  overflow: auto;
+}
+
+.projectTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.projectTable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.projectTable td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.projectRow {
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.projectRow:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.projectRow.isSelected {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.projectRow.isActive {
+  outline: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  outline-offset: -1px;
+}
+
+.checkboxCell {
+  width: 52px;
+}
+
+.sortButton {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.projectNameCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.projectName {
+  font-weight: 600;
+}
+
+.projectMeta {
+  color: var(--text-muted);
+  font-size: 12px;
+  word-break: break-word;
+}
+
+.wrapText {
+  word-break: break-word;
+}
+
+.emptyStateCell {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 28px;
+}
+
+.workspaceLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.72fr);
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tableColumn {
+  min-width: 0;
+  min-height: 0;
+}
+
+.sidePanelShell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+  border-left: 1px solid var(--border);
+}
+
+.sideCard {
+  padding: 8px 10px;
+  border: 0;
+}
+
+.sidePanelBody {
+  min-height: 0;
+  overflow: auto;
+  padding: 0;
+}
+
+.tabsRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 4px 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabButton {
+  padding: 6px 10px;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.tabButton.isTabActive {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.headerSearch {
+  min-width: 0;
+  flex: 1;
+  max-width: 320px;
+}
+
+.cardHeader h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.primaryButton,
+.secondaryButton {
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease, border-color 120ms ease;
+}
+
+.primaryButton {
+  background: var(--accent-strong);
+  color: var(--button-foreground);
+  border-color: var(--accent-strong);
+}
+
+.secondaryButton {
+  background: var(--button-secondary-background);
+  color: var(--button-secondary-foreground);
+  border-color: var(--button-secondary-background);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-1px);
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.fieldStack {
+  display: grid;
+  gap: 10px;
+}
+
+.fieldControl {
+  display: grid;
+  gap: 6px;
+}
+
+.fieldControl span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.validationText {
+  color: var(--error);
+  font-size: 12px;
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.optionRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+}
+
+.optionRow small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.tipsList {
+  display: grid;
+  gap: 10px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.tipsList p {
+  margin: 0;
+}
+
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 6px 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.statusPrimary,
+.statusSecondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.statusPrimary strong {
+  font-size: 13px;
+}
+
+.statusIssue {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.status-error {
+  border-color: var(--error);
+}
+
+@media (max-width: 980px) {
+  .workspaceLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .statusBar {
+    flex-direction: column;
+  }
+}

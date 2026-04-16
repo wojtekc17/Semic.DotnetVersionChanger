@@ -1,0 +1,7 @@
+src/**
+webview/src/**
+webview/tsconfig.json
+tsconfig.json
+vite.config.ts
+.gitignore
+**/*.map
