@@ -4,4 +4,5 @@ webview/tsconfig.json
 tsconfig.json
 vite.config.ts
 .gitignore
+.vscode/**
 **/*.map

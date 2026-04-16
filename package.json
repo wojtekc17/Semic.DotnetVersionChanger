@@ -1,5 +1,5 @@
 {
-  "name": "semic-version-changer",
+  "name": "version-changer",
   "displayName": "Semic Version Changer (.NET)",
   "description": "Bulk edit .NET project versions across many .csproj files from a dedicated VS Code desktop-style UI.",
   "version": "1.0.0",

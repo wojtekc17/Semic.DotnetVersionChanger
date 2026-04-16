@@ -2,6 +2,10 @@
 
 Semic Version Changer (.NET) is a Visual Studio Code extension for bulk editing version-related properties across many `.csproj` files in the current workspace.
 
+## Demo
+
+![Semic Version Changer demo](media/demo.gif)
+
 ## Features
 
 - Scans single-root and multi-root workspaces for `.csproj` files
