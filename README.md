@@ -54,6 +54,7 @@ Useful scripts:
 - `npm run watch:webview` - watch only webview changes
 - `npm run lint` - strict TypeScript validation
 - `npm run package` - build and create a `.vsix`
+- `npm run publish:marketplace` - publish the current version to VS Code Marketplace
 
 ## Commands
 
@@ -110,7 +111,7 @@ npx vsce login <your-publisher-id>
 Publish a new version:
 
 ```bash
-npx vsce publish
+npm run publish:marketplace
 ```
 
 Publish a specific semver bump:
@@ -146,8 +147,10 @@ npm run package
 5. Publish:
 
 ```bash
-npx vsce publish
+npm run publish:marketplace
 ```
+
+Note: use `npm run publish:marketplace`, not plain `npm publish`. The plain `npm publish` command is for the npm registry, not for the VS Code Marketplace.
 
 ### Marketplace Checklist
 
