@@ -99,7 +99,7 @@
     "watch": "concurrently \"tsc -w -p .\" \"vite build --watch --config vite.config.mjs --configLoader native\"",
     "build:webview": "vite build --config vite.config.mjs --configLoader native",
     "watch:webview": "vite build --watch --config vite.config.mjs --configLoader native",
-    "package": "npm run compile && vsce package --githubBranch master --no-dependencies",
+    "package": "npm run compile && vsce package --githubBranch master",
     "publish:marketplace": "vsce publish --githubBranch master",
     "lint": "tsc --noEmit -p . && tsc --noEmit -p webview/tsconfig.json"
   },
