@@ -73,22 +73,31 @@ export class VersionChangerPanel implements vscode.WebviewViewProvider, vscode.D
       }
     });
 
-    const loaded = await this.versionService.LoadProjects(
-      this.clientState.options,
-      new Set(this.clientState.projects.filter((project) => project.selected).map((project) => project.id)),
-      this.clientState.lastSelectedProjectId
-    );
+    try {
+      const loaded = await this.versionService.LoadProjects(
+        this.clientState.options,
+        new Set(this.clientState.projects.filter((project) => project.selected).map((project) => project.id)),
+        this.clientState.lastSelectedProjectId
+      );
 
-    this.clientState.projects = loaded.projects.map((project) => ({
-      id: project.id,
-      selected: project.selected
-    }));
-    this.clientState.lastSelectedProjectId = loaded.lastSelectedProjectId;
+      this.clientState.projects = loaded.projects.map((project) => ({
+        id: project.id,
+        selected: project.selected
+      }));
+      this.clientState.lastSelectedProjectId = loaded.lastSelectedProjectId;
 
-    await this.PostMessage({
-      type: "projectsLoaded",
-      payload: loaded
-    });
+      await this.PostMessage({
+        type: "projectsLoaded",
+        payload: loaded
+      });
+    } catch (error) {
+      await this.PostMessage({
+        type: "error",
+        payload: {
+          message: error instanceof Error ? error.message : "Workspace scan failed."
+        }
+      });
+    }
   }
 
   public async UpdateSelectedProjects(): Promise<void> {
@@ -206,13 +215,39 @@ export class VersionChangerPanel implements vscode.WebviewViewProvider, vscode.D
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data:; style-src ${webview.cspSource}; font-src ${webview.cspSource}; script-src 'nonce-${nonce}';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data:; style-src ${webview.cspSource} 'nonce-${nonce}'; font-src ${webview.cspSource}; script-src 'nonce-${nonce}';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semic Version Changer (.NET)</title>
     <link href="${styleUri}" rel="stylesheet" />
+    <style nonce="${nonce}">
+      .webviewFallback {
+        box-sizing: border-box;
+        min-height: 100vh;
+        padding: 24px;
+        color: var(--vscode-foreground);
+        background: var(--vscode-editor-background);
+        font-family: var(--vscode-font-family);
+      }
+
+      .webviewFallback h2 {
+        margin: 0 0 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .webviewFallback p {
+        margin: 0;
+        color: var(--vscode-descriptionForeground);
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="webviewFallback">
+        <h2>Loading Semic Version Changer...</h2>
+        <p>If this message stays visible, rebuild the extension webview assets and reload the Extension Development Host.</p>
+      </main>
+    </div>
     <script nonce="${nonce}" type="module" src="${scriptUri}"></script>
   </body>
 </html>`;
